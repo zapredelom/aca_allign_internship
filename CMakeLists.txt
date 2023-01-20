@@ -1,0 +1,11 @@
+project(ACA)
+set(CMAKE_CXX_STANDARD 20)
+
+# if(MSVC)
+#   add_compile_options( /W4 /WX)
+# else()
+#   add_compile_options(  -Wall -Wextra -Wpedantic -Werror)
+# endif()
+add_subdirectory(Collection)
+add_subdirectory(Polar_Cartesian_Systems)
+add_subdirectory(Templates)

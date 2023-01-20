@@ -8,7 +8,7 @@ public:
     Array(const Array&);
     Array(const Array&&);
     Array(std::initializer_list<T>);
-    T& operator [](int index) {return _data[index];}
+    [[nodiscard]] T& operator [](int index) {return _data[index];}
     int size() { return _size;}
     int capacity() { return _capacity;}
     void push_back(T t);
