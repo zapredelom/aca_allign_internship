@@ -37,13 +37,6 @@ Cartesian Cartesian::operator-(const Cartesian& rhs)
 	return dec;
 }
 
-Cartesian Cartesian::operator=(const Cartesian& rhs)
-{
-	x = rhs.x;
-	y = rhs.y;
-	return *this;
-}
-
 double Cartesian::module() const
 {
 	return sqrt(x * x + y * y);

@@ -39,7 +39,7 @@ private:
     std::shared_ptr<ListNode> _last;
 
 public:
-    class ListIterator: public std::iterator<std::forward_iterator_tag, ValueType>{
+    class ListIterator{
         public:
         using iterator_category = std::forward_iterator_tag;
         using value_type = ValueType;

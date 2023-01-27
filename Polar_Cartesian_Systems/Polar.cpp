@@ -38,12 +38,12 @@ Polar Polar::operator-(const Polar& rhs)
 	return pol;
 }
 
-Polar Polar::operator=(const Polar& rhs)
-{
-	angle = rhs.angle;
-	dist = rhs.dist;
-	return *this;
-}
+// Polar Polar::operator=(const Polar& rhs)
+// {
+// 	angle = rhs.angle;
+// 	dist = rhs.dist;
+// 	return *this;
+// }
 
 double Polar::getAngle() const
 {

@@ -1,5 +1,5 @@
 #ifndef CARTESIAN_H
-#define CASRTESIAN_H
+#define CARTESIAN_H
 class Polar;
 class Cartesian
 {
@@ -12,7 +12,6 @@ public:
 	void printCoords();
 	Cartesian operator+(const Cartesian& rhs);
 	Cartesian operator-(const Cartesian& rhs);
-	Cartesian operator=(const Cartesian& rhs);
 	double module() const;
 	double getX() const;
 	double getY() const;

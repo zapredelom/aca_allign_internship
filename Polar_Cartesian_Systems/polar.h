@@ -12,7 +12,7 @@ public:
 	void printCoords();
 	Polar operator+(const Polar& rhs);
 	Polar operator-(const Polar& rhs);
-	Polar operator=(const Polar& rhs);
+	//Polar operator=(const Polar& rhs);
 	double getAngle() const;
 	double getDist() const;
 private:

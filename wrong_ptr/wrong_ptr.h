@@ -4,7 +4,7 @@ class WrongPtr{
 public:
     WrongPtr(): _ptr(nullptr){}
     WrongPtr(T* ptr): _ptr(ptr){(*_cout)++;}
-    WrongPtr(const WrongPtr& other)(_count = other.count);
+    WrongPtr(const WrongPtr& other)(_ptr = other._ptr;_count = other.count , (*_count)++);
     WrongPtr(WrongPtr&& other):_ptr(other._ptr) {
         other._ptr = nullptr;
     }

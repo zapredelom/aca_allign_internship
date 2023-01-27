@@ -10,7 +10,6 @@ class tmpClass {
     public:
     tmpClass(T x):value(x){}
     tmpClass():value(0){}
-    tmpClass(const tmpClass& op2){}
     private:
     T value;
 };
