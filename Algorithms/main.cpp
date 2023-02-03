@@ -1,9 +1,9 @@
 #include <chrono>
 #include <iostream>
 #include <random>
-#include <vector>
 #include <ranges>
 #include <unordered_map>
+#include <vector>
 
 #include "DynamicProgramming.hpp"
 
@@ -13,7 +13,7 @@ class Measurer {
   ~Measurer() {
     auto end = std::chrono::steady_clock::now();
     std::cout << std::chrono::duration_cast<std::chrono::microseconds>(end -
-                                                                      _begin)
+                                                                       _begin)
                      .count()
               << std::endl;
   }
@@ -72,62 +72,90 @@ void merge(std::vector<int>& v, int begin, int mid, int end) {
     begin++;
   }
 }
-bool isValidNumber(const std::string& numstr){
-  if(numstr.size() >3) return false;
+bool isValidNumber(const std::string& numstr) {
+  if (numstr.size() > 3) return false;
   bool isLeadingZero = numstr.size() > 1 && numstr[0] == '0';
-  if(isLeadingZero) return false;
+  if (isLeadingZero) return false;
   int value = 0;
   int ten = 1;
-  for(int i = numstr.size() - 1; i >= 0; --i){
-    if(numstr[i] <'0' || numstr[i] > '9') return false;
+  for (int i = numstr.size() - 1; i >= 0; --i) {
+    if (numstr[i] < '0' || numstr[i] > '9') return false;
     value += ten * (numstr[i] - '0');
     ten *= 10;
   }
-  if(value > 255) return false ;
+  if (value > 255) return false;
   return true;
 }
-bool IsValidIp(const std::string& ip){
-  auto DotCount = std::count_if(begin(ip), end(ip), [](char ch) {return ch == '.'; });
+bool IsValidIp(const std::string& ip) {
+  auto DotCount =
+      std::count_if(begin(ip), end(ip), [](char ch) { return ch == '.'; });
   // alternatively can be writen
   // auto DotCount = std::count(begin(ip), end(ip), '.');
-  if(DotCount != 3) return false;
+  if (DotCount != 3) return false;
   std::string current = "";
   int currentIndex = 0;
-  do{
-    if(ip[currentIndex] != '.'){
+  do {
+    if (ip[currentIndex] != '.') {
       current += ip[currentIndex];
     } else {
-      if(!isValidNumber(current)) return false;
+      if (!isValidNumber(current)) return false;
       current = "";
     }
     currentIndex++;
-  } while(currentIndex < ip.size());
+  } while (currentIndex < ip.size());
   return true;
 }
 
 int main() {
   std::random_device rd;
   std::mt19937 mt(rd());
-  std::uniform_int_distribution dis(1,1000);
-  constexpr int count = 1000;
+  std::uniform_int_distribution dis(1, 1000);
+  constexpr int count = 2000;
 
-  std::vector<int> prices;
-  std::generate_n(std::back_inserter(prices), count, [&mt, &dis](){return dis(mt);});
-  sort(prices);
+  std::vector<std::vector<int>> vv;
+  for (int i = 0; i < count; i++) {
+    std::vector<int> v;
+    std::generate_n(std::back_inserter(v), count,
+                    [&mt, &dis]() { return dis(mt); });
+    vv.push_back(v);
+  }
 
-  // { // uncomment this seconion for values no more than 50, othewise it will take too long to compleate
+  {
+    Measurer m;
+    for (int i = 0; i < count; i++) {
+      for (int j = 0; j < count; j++) {
+        vv[i][j] = i * j;
+      }
+    }
+  }
+
+  {
+    Measurer m;
+    for (int i = 0; i < count; i++) {
+      for (int j = count -1; j > 0; j--) {
+        vv[j][i] = i * j;
+      }
+    }
+  }
+
+
+  // std::vector<int> prices;
+  // std::generate_n(std::back_inserter(prices), count, [&mt, &dis](){return
+  // dis(mt);}); sort(prices);
+
+  // { // uncomment this seconion for values no more than 50, othewise it will
+  // take too long to compleate
   //   Measurer m;
   //   Cut(prices, prices.size());
   // }
-  {
-    Measurer m;
+  // {
+  //   Measurer m;
 
-    std::unordered_map<int, int> mem;
-    Cut(prices, prices.size(), mem);
-  }
-  {
-    Measurer m;
-    Cut_buttom_up(prices, prices.size());
-  }
+  //   std::unordered_map<int, int> mem;
+  //   Cut(prices, prices.size(), mem);
+  // }
+  // {
+  //   Measurer m;
+  //   Cut_buttom_up(prices, prices.size());
+  // }
 }
-
