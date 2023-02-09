@@ -16,7 +16,6 @@ class TemplateMethod{
     virtual void setLocation() = 0;
 
     virtual bool isLocationNeeded() {return true;}
-    
     protected:
 
     bool _isLocationNeeded;

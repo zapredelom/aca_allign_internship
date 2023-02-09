@@ -146,15 +146,11 @@ template <typename T>
 struct is_const<const T>: std::true_type {
 };
 
-template <typename T, typename enable = void>
+template <typename T>
 struct TypeIdentity {
-  using type = double;
+  using type = T;
 };
 
-template <typename T>
-struct TypeIdentity<T, typename std::enable_if_t<std::is_integral_v<T>>> {
-  using type = long long int;
-};
 
 
 
@@ -168,13 +164,42 @@ T sum (T a, TypeIdentity_t<T> b)
   return a+b;
 }
 
+void value(int a){
+  std::cout<<a<< " is plain value"<<std::endl;
+}
 
+void value(const int& a){
+  std::cout<< a << " is const referance"<<std::endl;
+}
+
+template <typename T>
+struct ValueType{
+  using type = T;
+  ValueType(T a):_a(a){
+  }
+  void operator()(){
+    std::cout<<_a<< " is plain value"<<std::endl;
+  }
+  T _a;
+};
+
+template <typename T>
+struct ValueType<T&>{
+  using type = T;
+  ValueType(T& a):_a(a){
+  }
+  void operator()(){
+    std::cout<< _a << " is referance"<<std::endl;
+  }
+  T& _a;
+};
 
 int main (){
   int a = 1;
+  int& c = a;
   double b = 2;
-  std::cout<<sum(a, b)<<std::endl;
-
+  ValueType<decltype(a)> x(a);
+  x();
 }
 
 
