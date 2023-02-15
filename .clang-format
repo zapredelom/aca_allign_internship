@@ -1,0 +1,11 @@
+{
+    BasedOnStyle: Google,
+    UseTab: Never,
+    IndentWidth: 4,
+    TabWidth: 4,
+    AllowShortIfStatementsOnASingleLine: false,
+    AccessModifierOffset: -4,
+    NamespaceIndentation: NI_Inner,
+    ColumnLimit: 120,
+    FixNamespaceComments: false,
+}

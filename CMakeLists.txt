@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD 20)
 # else()
 #   add_compile_options(  -Wall -Wextra -Wpedantic -Werror)
 # endif()
-
 add_subdirectory(Algorithms)
 add_subdirectory(Collection)
 #add_subdirectory(constexpr)
