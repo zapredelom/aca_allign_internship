@@ -6,22 +6,7 @@
 #include <vector>
 
 #include "DynamicProgramming.hpp"
-
-class Measurer {
- public:
-  Measurer() : _begin(std::chrono::steady_clock::now()) {}
-  ~Measurer() {
-    auto end = std::chrono::steady_clock::now();
-    std::cout << std::chrono::duration_cast<std::chrono::microseconds>(end -
-                                                                       _begin)
-                     .count()
-              << std::endl;
-  }
-
- private:
-  std::chrono::time_point<std::chrono::steady_clock> _begin;
-};
-
+#include "Measurer.hpp"
 void merge_sort(std::vector<int>& v, int begin, int end);
 void merge(std::vector<int>& v, int begin, int mid, int end);
 
