@@ -1,26 +1,31 @@
-#include <algorithm>
 #include <chrono>
+#include <future>
 #include <iostream>
 #include <map>
-#include <mutex>
-#include <ranges>
-#include <thread>
-#include <vector>
 
-#include "BusyWait.hpp"
-#include "ExpirationCache.hpp"
-#include "Primes.hpp"
-using namespace std::literals::chrono_literals;
+#include "thread_pull.h"
+using namespace std::chrono_literals;
+
+int square(int a) { return a * a; }
+double add(double a, double b) { return a * a; }
 int main() {
-    ExpirationCache<std::string, std::string> e(200ms);
-    e.set("100", "hundred");
-    std::cout << e.get("100").value() << std::endl;
-    std::this_thread::sleep_for(215ms);
-    auto val = e.get("100");
+    ThreadPool t;
+    std::mutex outMutex;
 
-    if (val) {
-        std::cout << val.value()<<std::endl;
-    } else {
-        std::cout << "no value\n";
+
+    std::vector<std::future<void>> futures;
+    for (int i = 0; i < 100; i++) {
+        futures.push_back(t.addTask([i, &outMutex]() {
+            std::this_thread::sleep_for(1ms);
+            std::scoped_lock lk(outMutex);
+            std::cout << "task number " << i << " thread id " << std::this_thread::get_id() << std::endl;
+        }));
     }
+    for (auto& f : futures) {
+        f.wait();
+    }
+
+    // std::map<int, int> mp;
+    // for (auto [key, value] : mp) {
+    // }
 }
