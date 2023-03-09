@@ -5,33 +5,19 @@ using namespace std::chrono_literals;
 
 ThreadPool::ThreadPool() : _thread_count(std::thread::hardware_concurrency()) { initWorkers(); }
 
-std::future<void> ThreadPool::addTask(Task f) {
-    std::scoped_lock lock(_mutex);
-    std::promise<void> p;
-    std::future<void> fut = p.get_future();
-    if (_isRunning) {
-        _tasks.push({f,std::move(p)});
-        _cv.notify_one();
-    }
-    return fut;
-}
-
 void ThreadPool::worker() {
     while (_isRunning) {
         Task task;
-        std::promise<void> p;
         {
             std::unique_lock lock(_mutex);
             _cv.wait(lock, [this]() { return !_tasks.empty() || !_isRunning; });
             if (_isRunning) {
-                task = _tasks.front().first;
-                p = std::move(_tasks.front().second);
+                task = _tasks.front();
                 _tasks.pop();
             }
         }
-        if (task){
+        if (task) {
             task();
-            p.set_value();
         }
     }
 }
