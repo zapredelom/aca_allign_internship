@@ -23,27 +23,31 @@ std::future<double> addAsync(double a, double b) {
 }
 
 int main() {
-    ThreadPool t;
-    std::mutex outMutex;
+    std::vector<int> t {1,2,3,4,5};
+    std::vector<int> x;
 
-    std::vector<std::future<int>> futures;
-    for (int i = 0; i < 100; i++) {
-        auto task = [i, &outMutex](int x) -> int {
-            std::this_thread::sleep_for(1ms);
-            std::scoped_lock lk(outMutex);
-            std::cout << "task number " << x << " thread id " << std::this_thread::get_id() << std::endl;
-            return 1;
-        };
-        futures.push_back(t.addTask(task, 3));
-    }
-    for (auto& f : futures) {
-        std::cout << f.get() << std::endl;
-    }
+    std::copy(t.begin(), t.end(),std::back_inserter(x));
+    // ThreadPool t;
+    // std::mutex outMutex;
 
-    std::future<int> ft = std::async(square, 5);
-    std::cout << ft.get() << std::endl;
+    // std::vector<std::future<int>> futures;
+    // for (int i = 0; i < 100; i++) {
+    //     auto task = [i, &outMutex](int x) -> int {
+    //         std::this_thread::sleep_for(1ms);
+    //         std::scoped_lock lk(outMutex);
+    //         std::cout << "task number " << x << " thread id " << std::this_thread::get_id() << std::endl;
+    //         return 1;
+    //     };
+    //     futures.push_back(t.addTask(task, 3));
+    // }
+    // for (auto& f : futures) {
+    //     std::cout << f.get() << std::endl;
+    // }
 
-    std::future<double> ft1 = addAsync( 5, 6);
-    std::cout << ft1.get() << std::endl;
+    // std::future<int> ft = std::async(square, 5);
+    // std::cout << ft.get() << std::endl;
+
+    // std::future<double> ft1 = addAsync( 5, 6);
+    // std::cout << ft1.get() << std::endl;
 
 }
