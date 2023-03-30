@@ -86,7 +86,8 @@
         "coroutine": "cpp",
         "resumable": "cpp",
         "future": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "filesystem": "cpp"
     },
     "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
     "C_Cpp.clang_format_fallbackStyle": "Google",

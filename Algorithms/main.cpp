@@ -11,7 +11,7 @@
 void merge_sort(std::vector<int>& v, int begin, int end);
 void merge(std::vector<int>& v, int begin, int mid, int end);
 
-void sort(std::vector<int>& v) { merge_sort(v, 0, v.size()); }
+void sort(std::vector<int>& v) { merge_sort(v, 0, int(v.size())); }
 
 void buble_sort(std::vector<int>& v, int begin, int end) {
     for (int i = begin; i < end; i++) {
@@ -67,7 +67,7 @@ bool isValidNumber(const std::string& numstr) {
         return false;
     int value = 0;
     int ten = 1;
-    for (int i = numstr.size() - 1; i >= 0; --i) {
+    for (size_t i = numstr.size() - 1; i >= 0; --i) {
         if (numstr[i] < '0' || numstr[i] > '9')
             return false;
         value += ten * (numstr[i] - '0');

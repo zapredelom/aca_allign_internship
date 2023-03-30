@@ -25,10 +25,11 @@ void testAdapterPattern()
     ysu.AddStudent(std::make_shared<HighSchoolStudent>("Armen", "Hovhannisyan", 20));
      auto newAdapter =
                  std::make_shared<ArmenianStudentAdapter>("test", "test", 20);
-     ysu.AddStudent(newAdapter);
-     
+    ysu.AddStudent(newAdapter);
+
     ysu.PrintAllStudents();
 }
+
 int main() {
     testAdapterPattern();
 

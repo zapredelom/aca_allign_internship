@@ -1,0 +1,5 @@
+project(math_lib)
+add_executable(main main.cpp)
+target_include_directories(main PUBLIC ${CMAKE_SOURCE_DIR}/../)
+target_link_directories(main PUBLIC ${CMAKE_SOURCE_DIR}/../lib/build/Debug/)
+target_link_libraries(main math_lib)

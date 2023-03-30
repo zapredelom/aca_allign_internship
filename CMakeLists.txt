@@ -1,3 +1,4 @@
+cmake_minimum_required(VERSION 3.10)
 project(ACA)
 set(CMAKE_CXX_STANDARD 20)
 
@@ -18,3 +19,4 @@ add_subdirectory(wrong_ptr)
 add_subdirectory(TemplateMetaprogramming)
 add_subdirectory(concurency)
 add_subdirectory(desing_patterns)
+add_subdirectory(enum)

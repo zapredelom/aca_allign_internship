@@ -1,0 +1,2 @@
+project(math_lib)
+add_library(math_lib SHARED Mat.cpp)
