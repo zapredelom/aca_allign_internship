@@ -16,7 +16,7 @@ int main () {
     enumns::v1::geometry g1 = enumns::v1::geometry::circle;
     enumns::v2::geometry g2 = enumns::v2::circle;
         std::filesystem::path p("../");
-        std::string sss = p;
+        std::string sss = p.string();
     std::cout << p << std::endl;
     std::stack<std::filesystem::path> s;
     s.push(std::filesystem::canonical(p));

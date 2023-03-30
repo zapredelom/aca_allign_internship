@@ -8,6 +8,7 @@
 #include "DynamicProgramming.hpp"
 #include "HashTable.h"
 #include "Measurer.hpp"
+#include "SweepLine.h"
 void merge_sort(std::vector<int>& v, int begin, int end);
 void merge(std::vector<int>& v, int begin, int mid, int end);
 
